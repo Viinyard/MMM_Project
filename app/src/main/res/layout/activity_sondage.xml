@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/label1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Rédigez la question :" />
+
+    <EditText
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"/>
+
+    <TextView
+        android:id="@+id/label2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="Nombre de choix possibles :" />
+
+    <EditText
+        android:id="@+id/nbChoix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/ajout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Ajouter" />
+
+    <ListView
+        android:id="@+id/reponses"
+        android:layout_width="match_parent"
+        android:layout_height="250px"
+        android:layout_weight="2"/>
+
+    <Button
+        android:id="@+id/publish"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Publier question" />
+
+</LinearLayout>
