@@ -79,6 +79,7 @@ public class ViewResult extends AppCompatActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                hmReponse.clear();
                 // Get Post object and use the values to update the UI
                 Iterator<DataSnapshot> it = dataSnapshot.child("reponses").child(course.getName()).child(sondage.question).getChildren().iterator();
 

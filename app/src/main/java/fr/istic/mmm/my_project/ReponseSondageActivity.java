@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -76,11 +77,12 @@ public class ReponseSondageActivity extends AppCompatActivity {
                     Reponse reponse = new Reponse(currentUser.getEmail(), choix);
                     mDatabase.child("reponses").child(course.name).child(sondage.question).child(currentUser.getUid()).setValue(reponse);
                     mDatabase.push();
-                    Intent intent = new Intent(ReponseSondageActivity.this, ViewPollActivity.class);
-                    intent.putExtra("course", course);
-                    intent.putExtra("sondage", sondage);
 
-                    startActivity(intent);
+                    Toast.makeText(ReponseSondageActivity.this, "Votre réponse a bien été prise en compte", Toast.LENGTH_SHORT).show();
+
+                    setResult(RESULT_OK);
+
+                    finish();
                 }
             }
         });

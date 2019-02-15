@@ -97,9 +97,7 @@ public class CreationSondageActivity extends AppCompatActivity {
                 mDatabase.child("sondage").child(course.name).child(sondage.question).setValue(sondage);
                 mDatabase.push();
 
-                question.setText("");
-                arrayAdapter.clear();
-                msgPublication.show();
+                finish();
             }
         });
 

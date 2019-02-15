@@ -72,6 +72,7 @@ public class ViewPollActivity extends AppCompatActivity {
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listSondage.clear();
                 // Get Post object and use the values to update the UI
                 Iterator<DataSnapshot> it = dataSnapshot.child("sondage").child(course.getName()).getChildren().iterator();
                 while(it.hasNext()) {

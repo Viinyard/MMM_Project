@@ -59,6 +59,7 @@ public class ViewResultOwnerActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
+                listReponse.clear();
                 Iterator<DataSnapshot> it = dataSnapshot.child("reponses").child(course.getName()).child(sondage.question).getChildren().iterator();
 
                 while(it.hasNext()) {

@@ -28,12 +28,13 @@ public class ViewCourseActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private List<Course> listCourse = new ArrayList<>();
+    private List<Course> listCourse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_course);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.course_recycler_view);
 
@@ -41,6 +42,7 @@ public class ViewCourseActivity extends AppCompatActivity {
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
+        listCourse = new ArrayList<>();
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -70,6 +72,7 @@ public class ViewCourseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
+                listCourse.clear();
                 Iterator<DataSnapshot> it = dataSnapshot.child("course").getChildren().iterator();
                 while(it.hasNext()) {
                     listCourse.add(it.next().getValue(Course.class));
