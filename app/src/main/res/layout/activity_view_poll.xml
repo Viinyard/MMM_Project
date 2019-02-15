@@ -25,6 +25,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginBottom="15dp"
             android:padding="5dp"
+            android:textAlignment="center"
             android:background="@android:color/holo_blue_dark"
             android:textColor="@android:color/black"
             android:textSize="16dp"
