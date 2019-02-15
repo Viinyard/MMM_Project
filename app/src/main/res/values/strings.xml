@@ -35,6 +35,7 @@
     <string name="action_view_poll">View poll</string>
     <string name="repondre">Answering</string>
     <string name="view_results">View results</string>
+    <string name="remove">Delete</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
 </resources>
