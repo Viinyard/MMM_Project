@@ -26,6 +26,7 @@ public class ViewPollActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private TextView courseName;
 
     private List<Sondage> listSondage = new ArrayList<>();
 
@@ -35,13 +36,14 @@ public class ViewPollActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_poll);
 
         recyclerView = (RecyclerView) findViewById(R.id.course_recycler_view);
-
+        courseName = (TextView) findViewById(R.id.course_name_tv);
 
         Intent intent = getIntent();
         final Course course = (Course) intent.getSerializableExtra("course");
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
+        courseName.setText(course.getName());
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);

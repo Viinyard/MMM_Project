@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class ViewResultOwnerActivity extends AppCompatActivity {
 
+    private TextView pollName, questionName;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -35,7 +36,7 @@ public class ViewResultOwnerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_course);
+        setContentView(R.layout.activity_view_result_owner);
 
         recyclerView = (RecyclerView) findViewById(R.id.course_recycler_view);
 
@@ -43,10 +44,16 @@ public class ViewResultOwnerActivity extends AppCompatActivity {
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
+        pollName = (TextView) findViewById(R.id.poll_name_tv);
+        questionName = (TextView) findViewById(R.id.question_name_tv);
+
         Intent intent = getIntent();
         final Course course = (Course) intent.getSerializableExtra("course");
         final Sondage sondage = (Sondage) intent.getSerializableExtra("sondage");
         final String reponse = intent.getStringExtra("reponse");
+
+        pollName.setText(sondage.question);
+        questionName.setText(reponse);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);

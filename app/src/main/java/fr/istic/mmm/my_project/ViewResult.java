@@ -30,15 +30,19 @@ public class ViewResult extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private TextView pollName;
+
     private List<String> listReponse = new ArrayList<>();
     private Map<String, List<Reponse>> hmReponse = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_course);
+        setContentView(R.layout.activity_view_result);
 
         recyclerView = (RecyclerView) findViewById(R.id.course_recycler_view);
+
+        pollName = findViewById(R.id.poll_name_tv);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -47,6 +51,8 @@ public class ViewResult extends AppCompatActivity {
         Intent intent = getIntent();
         final Course course = (Course) intent.getSerializableExtra("course");
         final Sondage sondage = (Sondage) intent.getSerializableExtra("sondage");
+
+        pollName.setText(sondage.question);
 
         listReponse = sondage.reponses;
 

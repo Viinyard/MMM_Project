@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminCourseActivity extends AppCompatActivity {
 
+    private TextView courseName;
     private Button btnCreatePoll, btnViewPoll, btnLogout, btnRemove;
 
     private FirebaseAuth mAuth;
@@ -28,6 +30,9 @@ public class AdminCourseActivity extends AppCompatActivity {
 
         btnCreatePoll = (Button) findViewById(R.id.button_create_poll);
         btnRemove = (Button) findViewById(R.id.remove);
+        courseName = (TextView) findViewById(R.id.course_name_tv);
+
+        courseName.setText(course.getName());
 
 
         btnViewPoll = (Button) findViewById(R.id.view_poll);

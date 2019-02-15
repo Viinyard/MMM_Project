@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AdminPollActivity extends AppCompatActivity {
 
+    private TextView pollName;
     private Button btnAnswering, btnViewResulsts, btnLogout, btnRemove;
 
     private FirebaseAuth mAuth;
@@ -28,6 +30,7 @@ public class AdminPollActivity extends AppCompatActivity {
         btnViewResulsts = (Button) findViewById(R.id.view_results_action);
         btnLogout = (Button) findViewById(R.id.logout);
         btnRemove = (Button) findViewById(R.id.remove);
+        pollName = (TextView) findViewById(R.id.poll_name_tv);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -38,6 +41,8 @@ public class AdminPollActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final Course course = (Course) intent.getSerializableExtra("course");
         final Sondage sondage = (Sondage) intent.getSerializableExtra("sondage");
+
+        pollName.setText(sondage.question);
 
         if(currentUser == null) {
             startActivity(new Intent(AdminPollActivity.this, MainActivity.class));
