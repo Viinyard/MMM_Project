@@ -55,26 +55,30 @@ public class MainActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                if(email != null && email.length() > 0 && password != null && password.length() > 0) {
 
-                                    Toast.makeText(MainActivity.this, "Login successful : " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
 
-                                    startActivity(new Intent(MainActivity.this, MenuActivity.class));
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(MainActivity.this, "Authentication failed." + task.getException().getMessage(),
-                                            Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        FirebaseUser user = mAuth.getCurrentUser();
+
+                                        Toast.makeText(MainActivity.this, "Login successful : " + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+
+                                        startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                                        finish();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(MainActivity.this, "Authentication failed." + task.getException().getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
-
-                            }
-                        });
+                            });
+                }
             }
         });
 
