@@ -21,9 +21,12 @@ public class AdminCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_course);
 
         Intent intent = getIntent();
-        Course course = (Course) intent.getSerializableExtra("course");
+        final Course course = (Course) intent.getSerializableExtra("course");
 
         btnCreatePoll = (Button) findViewById(R.id.button_create_poll);
+
+
+
         btnViewPoll = (Button) findViewById(R.id.view_poll);
         btnLogout = (Button) findViewById(R.id.logout);
 
@@ -35,17 +38,26 @@ public class AdminCourseActivity extends AppCompatActivity {
             startActivity(new Intent(AdminCourseActivity.this, MainActivity.class));
         }
 
+        if(!course.getOwner().equals(currentUser.getEmail())) {
+            btnCreatePoll.setEnabled(false);
+            btnCreatePoll.setVisibility(View.INVISIBLE);
+        }
+
         btnCreatePoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminCourseActivity.this, CreateCourseActivity.class));
+                Intent intent = new Intent(AdminCourseActivity.this, CreationSondageActivity.class);
+                intent.putExtra("course", course);
+                startActivity(intent);
             }
         });
 
         btnViewPoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminCourseActivity.this, ViewCourseActivity.class));
+                Intent intent = new Intent(AdminCourseActivity.this, ViewPollActivity.class);
+                intent.putExtra("course", course);
+                startActivity(intent);
             }
         });
 

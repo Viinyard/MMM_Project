@@ -11,6 +11,10 @@ public class Sondage implements Serializable {
     public String question;
     public List<String> reponses;
 
+    public Sondage() {
+
+    }
+
     public Sondage(String question, List<String> reponses) {
         this.question = question;
         this.reponses = reponses;

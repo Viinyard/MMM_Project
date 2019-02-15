@@ -1,5 +1,6 @@
 package fr.istic.mmm.my_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +47,8 @@ public class CreationSondageActivity extends AppCompatActivity {
 
         final Toast msgPublication = Toast.makeText(this, "Sondage publié !", Toast.LENGTH_LONG);
 
-
+        Intent intent = getIntent();
+        final Course course = (Course) intent.getSerializableExtra("course");
 
         question = findViewById(R.id.question_creation);
         nouvelleRep = findViewById(R.id.nouvelleRep);
@@ -92,7 +94,7 @@ public class CreationSondageActivity extends AppCompatActivity {
                 Sondage sondage = new Sondage(question.getText().toString(), reponses);
 
                 // Write a message to the database
-                mDatabase.child("sondage").child(sondage.question).setValue(sondage);
+                mDatabase.child("sondage").child(course.name).child(sondage.question).setValue(sondage);
                 mDatabase.push();
 
                 question.setText("");

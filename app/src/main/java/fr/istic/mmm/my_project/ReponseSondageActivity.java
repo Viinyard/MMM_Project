@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,6 +24,8 @@ public class ReponseSondageActivity extends AppCompatActivity {
     ListView reponses;
     Button valider;
     String choix;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +39,16 @@ public class ReponseSondageActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        Sondage sondage = (Sondage) intent.getSerializableExtra("sondage");
+        final Sondage sondage = (Sondage) intent.getSerializableExtra("sondage");
+        final Course course = (Course) intent.getSerializableExtra("course");
 
-        // mock
-        LinkedList<String> liste = new LinkedList<>();
-        liste.add("oui");
-        liste.add("non");
-        liste.add("je ne sais pas");
-        sondage = new Sondage("Tu l'as trop écrasé, César, ce Port-Salut ?", liste);
+        mAuth = FirebaseAuth.getInstance();
+
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null) {
+            startActivity(new Intent(ReponseSondageActivity.this, MainActivity.class));
+        }
 
         question.setText(sondage.question);
 
@@ -47,6 +56,8 @@ public class ReponseSondageActivity extends AppCompatActivity {
                 this, android.R.layout.simple_list_item_1, sondage.reponses);
 
         reponses.setAdapter(arrayAdapter);
+
+        final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Sélectionne la réponse et affiche un background coloré
         reponses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,7 +73,14 @@ public class ReponseSondageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (choix != null && !choix.isEmpty()) {
-                    // TODO : Firebase
+                    Reponse reponse = new Reponse(currentUser.getEmail(), choix);
+                    mDatabase.child("reponses").child(course.name).child(sondage.question).child(currentUser.getUid()).setValue(reponse);
+                    mDatabase.push();
+                    Intent intent = new Intent(ReponseSondageActivity.this, ViewPollActivity.class);
+                    intent.putExtra("course", course);
+                    intent.putExtra("sondage", sondage);
+
+                    startActivity(intent);
                 }
             }
         });
