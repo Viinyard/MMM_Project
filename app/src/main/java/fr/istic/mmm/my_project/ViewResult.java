@@ -1,6 +1,7 @@
 package fr.istic.mmm.my_project;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -29,6 +30,7 @@ public class ViewResult extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private TextView pollName;
 
@@ -41,6 +43,7 @@ public class ViewResult extends AppCompatActivity {
         setContentView(R.layout.activity_view_result);
 
         recyclerView = (RecyclerView) findViewById(R.id.course_recycler_view);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
         pollName = findViewById(R.id.poll_name_tv);
 
@@ -81,6 +84,28 @@ public class ViewResult extends AppCompatActivity {
         final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Refresh items
+                refreshItems();
+            }
+
+            void refreshItems () {
+                mAdapter = new ViewResult.MyCourseAdapter(listReponse, hmReponse);
+
+                recyclerView.setAdapter(mAdapter);
+                onItemsLoadComplete();
+            }
+
+            void onItemsLoadComplete () {
+                // Update the adapter and notify data set changed
+                // ...
+
+                // Stop refresh animation
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -110,7 +135,6 @@ public class ViewResult extends AppCompatActivity {
             }
         };
         mDatabase.addValueEventListener(postListener);
-
         // specify an adapter (see also next example)
 
 
