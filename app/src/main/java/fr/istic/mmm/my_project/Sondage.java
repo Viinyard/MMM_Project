@@ -1,12 +1,15 @@
 package fr.istic.mmm.my_project;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.List;
 
+@IgnoreExtraProperties
 public class Sondage implements Serializable {
 
-    String question;
-    List<String> reponses;
+    public String question;
+    public List<String> reponses;
 
     public Sondage(String question, List<String> reponses) {
         this.question = question;
