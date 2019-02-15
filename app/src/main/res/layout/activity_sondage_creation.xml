@@ -34,9 +34,14 @@
 
     <Button
         android:id="@+id/ajout"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ajouter" />
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:text="Ajouter"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/liste_creation"
@@ -46,8 +51,13 @@
 
     <Button
         android:id="@+id/publier"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Publier question" />
+        android:layout_marginTop="16dp"
+        android:background="@color/colorAccent"
+        android:text="publier"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
 </LinearLayout>
