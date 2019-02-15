@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@color/colorAccent"
-            android:text="@string/action_create_course"
+            android:text="@string/action_create_poll"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@color/colorAccent"
-            android:text="@string/action_view_courses"
+            android:text="@string/action_view_poll"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
     </LinearLayout>
