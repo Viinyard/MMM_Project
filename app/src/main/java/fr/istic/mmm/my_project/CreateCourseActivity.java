@@ -48,6 +48,8 @@ public class CreateCourseActivity extends AppCompatActivity {
 
                 mDatabase.child("course").child(course.name).setValue(course);
                 mDatabase.push();
+
+                finish();
             }
         });
     }
